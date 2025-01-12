@@ -256,4 +256,44 @@ function toggleTheme() {
         body.setAttribute('data-theme', 'dark');
     }
 }
+function moveTile(tile, newX, newY) {
+    tile.classList.add('moving');
+    tile.style.left = newX + 'px';
+    tile.style.top = newY + 'px';
+    
+    setTimeout(() => {
+        tile.classList.remove('moving');
+    }, 300);
+}
 
+function mergeTiles(tile1, tile2) {
+    const newValue = parseInt(tile1.dataset.value) * 2;
+    tile2.dataset.value = newValue;
+    tile2.textContent = newValue;
+    tile2.classList.remove('moving');
+    tile2.classList.add('merged');
+    
+    setTimeout(() => {
+        tile2.classList.remove('merged');
+    }, 400);
+    
+    tile1.remove();
+}function mergeTiles(tile1, tile2) {
+    const newValue = parseInt(tile1.dataset.value) * 2;
+    
+    // Add spin animation to merging tile
+    tile2.classList.add('merged');
+    tile2.dataset.value = newValue;
+    tile2.textContent = newValue;
+    
+    // Update score
+    updateScore(newValue);
+    
+    // Remove animation class after it completes
+    setTimeout(() => {
+        tile2.classList.remove('merged');
+    }, 500);
+    
+    // Remove the other tile
+    tile1.remove();
+}
