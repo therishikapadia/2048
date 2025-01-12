@@ -1,0 +1,133 @@
+:root {
+    /* Light Theme */
+    --background-color: #faf8ef;
+    --text-color: #776e65;
+    --tile-color: #cdc1b4;
+    --board-color: #bbada0;
+    --button-color: #8f7a66;
+    --button-hover-color: #9c8a77;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme */
+    --background-color: #2d2d2d;
+    --text-color: #5e2828;
+    --tile-color: #3c3a32;
+    --board-color: #4a4840;
+    --button-color: #5a524a;
+    --button-hover-color: #6b635b;
+    --heading:#a07143;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: var(--heading);
+    font-size: 80px;
+    margin: 0;
+}
+
+.score-container {
+    background-color: var(--board-color);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px 0;
+    font-size: 25px;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 10px;
+    background-color: var(--board-color);
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+.tile {
+    width: 100px;
+    height: 100px;
+    background-color: var(--tile-color);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    font-weight: bold;
+    color: var(--text-color);
+    transition: transform 0.2s, opacity 0.2s; /* Add transition for smooth animations */
+}
+
+.tile.merged {
+    animation: pop 0.2s ease-in-out;
+}
+
+.tile.new {
+    animation: appear 0.2s ease-in-out;
+}
+
+#reset-button, #theme-toggle {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#reset-button:hover, #theme-toggle:hover {
+    background-color: var(--button-hover-color);
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes appear {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(var(--x), var(--y)); }
+}
+
+.tile {
+    position: absolute;
+    transition: top 0.2s, left 0.2s;
+    animation: appear 0.2s ease-in-out;
+}
+
+.tile.merged {
+    animation: pop 0.2s ease-in-out;
+}
+
+.tile.new {
+    animation: appear 0.2s ease-in-out;
+}
+
+.game-over {
+    animation: shake 0.5s ease-in-out;
+}
